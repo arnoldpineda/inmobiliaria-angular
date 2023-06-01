@@ -1,0 +1,81 @@
+<div class="card p-5">
+
+    <form #f="ngForm" (ngSubmit)="crearProducto()">
+        
+        <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Nombre: </label>
+            <div class="col-sm-10">
+                <input #nombre="ngModel" class="form-control" [ngClass]="nombre.invalid &&
+                (nombre.dirty || nombre.touched) ? 'is-invalid' : ''" type="text" name="nombre"
+                [(ngModel)]="producto.nombre" required maxlength="50" />
+                <div class="invalid-feedback">
+                    Por favor, ingrese un nombre válido.
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Descripcion: </label>
+            <div class="col-sm-10">
+                <input #descripcion="ngModel" class="form-control" [ngClass]="descripcion.invalid &&
+                (descripcion.dirty || descripcion.touched) ? 'is-invalid' : ''" type="text" name="descripcion"
+                [(ngModel)]="producto.descripcion" required maxlength="50" />
+                <div class="invalid-feedback">
+                    Por favor, ingrese una descripcion válida.
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Precio: </label>
+            <div class="col-sm-10">
+                <input #precio="ngModel" class="form-control" [ngClass]="precio.invalid &&
+                (precio.dirty || precio.touched) ? 'is-invalid' : ''" type="number" name="precio"
+                [(ngModel)]="producto.precio" required />
+                <div class="invalid-feedback">
+                    Por favor, ingrese un precio válido.
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Unidades: </label>
+            <div class="col-sm-10">
+                <input #unidades="ngModel" class="form-control" [ngClass]="unidades.invalid &&
+                (unidades.dirty || unidades.touched) ? 'is-invalid' : ''" type="number" name="unidades"
+                [(ngModel)]="producto.unidades" required  />
+                <div class="invalid-feedback">
+                    Por favor, ingrese una cantidad válida.
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Imagen: </label>
+            <div class="col-sm-10">
+                <input type="file" name="imagenes" (change)="onFileChange($event)" multiple />
+                <div class="invalid-feedback">
+                    Por favor, ingrese al menos una imagen.
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Categoría: </label>
+            <div class="col-sm-10">
+                <div *ngFor="let item of categorias; index as i">
+                    <input type="checkbox" name="categoria{{i+1}}" [(ngModel)]="producto.categoria[i]" [value]="item" required>
+                    <label>{{item}}</label>
+                </div>
+                <div class="invalid-feedback">
+                    Por favor, seleccione al menos una categoría.
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" [disabled]="f.invalid" class="btn btn-primary">
+            <i class="fa-solid {{esEdicion ? 'fa-pencil' : 'fa-circle-plus'}} me-1"></i>
+            {{ esEdicion ? 'Editar' : 'Crear' }} Producto
+        </button>
+    </form>
+</div>

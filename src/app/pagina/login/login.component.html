@@ -1,0 +1,27 @@
+<div class="card p-5 justify-content-center">
+    <div class="form-signin w-50 m-auto">
+        <h1 class="text-center">Login</h1>
+        <form #f="ngForm" (ngSubmit)="login()">
+            <app-alerta [alerta]="alerta"></app-alerta>
+            <div class="form-floating">
+                <input #email="ngModel" class="form-control" [ngClass]="{'is-invalid': email.invalid && (email.dirty || email.touched)}"
+                    type="email" name="email" [(ngModel)]="sesion.email" email required id="floatingInput"
+                    placeholder="name@example.com" />
+                <label for="floatingInput">Email</label>
+            </div>
+
+            <div class="form-floating">
+                <input #password="ngModel" class="form-control" [ngClass]="{'is-invalid': password.invalid && (password.dirty || password.touched)}"
+                    type="password" name="password" [(ngModel)]="sesion.password" required id="floatingPassword"
+                    placeholder="Password" />
+                <label for="floatingPassword">Contraseña:</label>
+            </div>
+            
+            <div class="text-end mt-2">
+                <a href="#" class="text-primary">Recordar Contraseña</a>
+            </div>
+
+            <button class="w-100 btn btn-lg btn-primary" type="submit" [disabled]="f.invalid">Iniciar sesión</button>
+        </form>
+    </div>
+</div>
